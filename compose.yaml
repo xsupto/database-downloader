@@ -1,0 +1,7 @@
+version: "3.8"
+services:
+  server:
+    container_name: db_backup
+    build:
+      context: .
+      target: final

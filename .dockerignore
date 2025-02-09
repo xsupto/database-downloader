@@ -1,0 +1,14 @@
+**/.DS_Store
+**/.dockerignore
+**/.git
+**/.gitignore
+**/.project
+**/.vs
+**/.vscode
+**/docker-compose*
+**/compose.y*ml
+**/Dockerfile*
+/bin
+/target
+LICENSE
+README.md

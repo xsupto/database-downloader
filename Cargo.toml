@@ -1,0 +1,15 @@
+[package]
+name = "db_writter"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+aws-config = { version = "1.5.15", features = ["behavior-version-latest"] }
+aws-credential-types = { version = "1.2.1", features = ["hardcoded-credentials"] }
+aws-sdk-s3 = "1.71.0"
+chrono = "0.4.39"
+dotenv = "0.15.0"
+env_logger = "0.11.6"
+log = "0.4.25"
+tokio = { version = "1.43.0", features = ["full"] }
+tokio-cron-scheduler = "*"
