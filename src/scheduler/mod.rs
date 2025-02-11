@@ -49,7 +49,7 @@ pub async fn setup_scheduler() -> Result<(), Box<dyn Error>> {
     let sched = JobScheduler::new().await?;
 
     sched
-        .add(Job::new_async("0 0 */23 * * *", |uuid, mut l| {
+        .add(Job::new_async("0 0 1 * * *", |uuid, mut l| {
             Box::pin(async move {
                 match run_job().await {
                     Ok(()) => info!("Backup job completed successfully"),
