@@ -35,7 +35,7 @@ RUN apk add --no-cache bash
 
 COPY --from=build /bin/server /bin/
 COPY backup.sh /app/backup.sh
-COPY .env /app/.env
+COPY .env.example /app/.env
 
 RUN chmod +x /app/backup.sh
 RUN chown -R appuser:appuser /app
