@@ -1,5 +1,6 @@
 /target
-.env*
 .idea
 BACKUP*
-/deployment
+deployment
+.env.local
+.env

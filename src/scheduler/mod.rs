@@ -41,7 +41,7 @@ async fn run_job() -> Result<(), Box<dyn Error + Send + Sync>> {
 
 async fn run_delete_job() -> Result<(), Box<dyn Error + Send + Sync>> {
     upload::delete_files().await;
-    println!("File deletion process completed.");
+    info!("File deletion process completed.");
     Ok(())
 }
 
