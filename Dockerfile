@@ -18,7 +18,6 @@ RUN --mount=type=bind,source=src,target=src \
 
 FROM  alpine AS final
 ARG UID=10001
-RUN apk update
 RUN apk add --no-cache bash postgresql16-client
 
 RUN adduser \
