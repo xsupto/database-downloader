@@ -117,7 +117,6 @@ impl UploadConfig {
             .send()
             .await?;
 
-
         for object in response.contents() {
             if let Some(last_modified) = object.last_modified() {
                 let system_time = UNIX_EPOCH + Duration::from_secs_f64(last_modified.secs() as f64);

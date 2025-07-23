@@ -48,8 +48,11 @@ async fn run_delete_job() -> Result<(), Box<dyn Error + Send + Sync>> {
 pub async fn setup_scheduler() -> Result<(), Box<dyn Error>> {
     let sched = JobScheduler::new().await?;
 
+    let backup_corn = std::env::var("BACKUP_CRON").unwrap_or_else(|_| "0 0 */23 * * *".to_string());
+    let clean_corn = std::env::var("CLEAN_CRON").unwrap_or_else(|_| "0 0 6 * * Sat".to_string());
+
     sched
-        .add(Job::new_async("0 0 */23 * * *", |uuid, mut l| {
+        .add(Job::new_async(backup_corn, |uuid, mut l| {
             Box::pin(async move {
                 match run_job().await {
                     Ok(()) => info!("Backup job completed successfully"),
@@ -66,7 +69,7 @@ pub async fn setup_scheduler() -> Result<(), Box<dyn Error>> {
         .await?;
 
     sched
-        .add(Job::new_async("0 0 6 * * Sat", |uuid, mut l| {
+        .add(Job::new_async(clean_corn, |uuid, mut l| {
             Box::pin(async move {
                 match run_delete_job().await {
                     Ok(()) => info!("Successfully delete old db backups"),
