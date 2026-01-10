@@ -48,9 +48,9 @@ async fn run_delete_job() -> Result<(), Box<dyn Error + Send + Sync>> {
 pub async fn setup_scheduler() -> Result<(), Box<dyn Error>> {
     let sched = JobScheduler::new().await?;
 
-    let backup_corn = std::env::var("BACKUP_CRON").unwrap_or_else(|_| "0 0 */23 * * *".to_string());
+    let backup_corn = std::env::var("BACKUP_CRON").unwrap_or_else(|_| "* */5 * * * *".to_string());
     let clean_corn = std::env::var("CLEAN_CRON").unwrap_or_else(|_| "0 0 6 * * Sat".to_string());
-
+    println!("Backup cron: {}", backup_corn);
     sched
         .add(Job::new_async(backup_corn, |uuid, mut l| {
             Box::pin(async move {
@@ -88,7 +88,7 @@ pub async fn setup_scheduler() -> Result<(), Box<dyn Error>> {
     sched.start().await?;
 
     loop {
-        tokio::time::sleep(Duration::from_secs(3600)).await;
+        tokio::time::sleep(Duration::from_secs(60)).await;
         info!("Scheduler is running...");
     }
 }
